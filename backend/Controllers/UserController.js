@@ -43,51 +43,35 @@ const index=(req,resp,next)=>
  */
 const update=(req,resp,next)=>
 {
- 
-    let email =req.body.email;
-    let last_name=req.body.last_name;
-    let first_name =req.body.first_name;
-    let country=req.body.country;
-    let city=req.body.city;
-    let phonenumber=req.body.phonenumber;
-    // first we need to make sure the the user is already exist
-    client.query(`select * from users where email ='${email}' `,(err,res)=>
     
-    {
-     if(!err)
-     {// the select request have been made successfully
-         
-          if(res.rowCount!=0)
-          {// the user is already exist
-            client.query(`UPDATE users SET 
-            first_name= '${first_name}',
-            last_name= '${last_name}',
-            phone_number= ${phonenumber},
-            country= '${country}',
-            city= '${city}' 
-            WHERE email = '${email}' `,(err,res)=>
-            
-            {
-             if(!err)
-             {// the changes have been made successfully
-                
-                  resp.json({message : "Changes have been made successfully"});
-                 
-                  
-             }
-             else
-             { // an error has occurred whe we try to send update th data base
-                 resp.json({err});
-             }
-            })
-          }else
+    // define a array of parameteres that we will use for first Parameterized Query (select query)
+    let sql=[req.body.email];
+    // prepare the Parameterized Query
+    const selectquery = "SELECT * FROM users WHERE email= $1";
+    // execute the Parameterized Query
+    client.query(selectquery, sql).then(res => {
+        if(res.rowCount!=0)
+        {// the user is already exist
+          // define a array of parameteres that we will use for first Parameterized Query (Update query)
+          let sql2=[req.body.email,req.body.last_name,req.body.first_name,req.body.country,req.body.city,req.body.phonenumber]; 
+          // prepare the Parameterized Query
+          const updatequery = "UPDATE users SET first_name= $3,last_name=$2,phone_number= $6,country= $4,city= $5 WHERE email =$1";   
+          // execute the Parameterized Query
+          client.query(updatequery,sql2).then(resu =>
           {
-            resp.json({message:"User does not exist"});
-          } 
-                   
-     }
-    
-    })
+              
+            resp.json({message : "Changes have been made successfully"});
+          
+          }).catch(err=>{// an error occurred while trying to connect to the database
+            resp.json({err})
+          })
+        }else
+        {
+          resp.json({message:"User does not exist ,you must enter an existing user's email address"});
+        } 
+      }).catch(err=>{// an error occurred while trying to connect to the database
+        resp.json({err})
+      });
     
 } 
 module.exports={index,update}
