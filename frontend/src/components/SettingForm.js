@@ -1,3 +1,7 @@
+/**
+ * in this component I created an formik form ,where user can change
+  * his information 
+ */
 import React from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,7 +13,9 @@ import Container from "@material-ui/core/Container";
 import {Image} from './Profilpic'
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
+//I use this object to validate the entered phone number
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/ ;
+// here i define the elements of our form and the mandatory elements
 let SettingsSchema = yup.object().shape({
   Name: yup.string().required("This field is required."),
   Surname: yup.string().required("This field is required."),
@@ -24,7 +30,7 @@ let SettingsSchema = yup.object().shape({
     .required("This field is required.")
     .matches(phoneRegExp, 'Phone number is not valid')
 });
-
+// the style that we use in our form page
 const useStyles = makeStyles(theme => ({
   "@global": {
     body: {
@@ -59,8 +65,9 @@ export const SaveForm = () => {
       <CssBaseline />
        
       <div className={classes.paper}>
-      <div className={classes.paper}><Image/></div> 
+       
         <Formik
+          //inisialisation
           initialValues={{
             Name: "",
             Surname: "",
@@ -70,13 +77,16 @@ export const SaveForm = () => {
             PhoneNumber: ""
           }}
           validationSchema={SettingsSchema}
+          //define the function that we will execute when the user submit the form
           onSubmit={values => {
-            
-            login(values);
+            Save(values);
           }}
         >
           {({ errors, handleChange, touched }) => (
             <Form className={classes.form}>
+              <Grid>
+              <div className={classes.paper}><Image/></div>
+              </Grid>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -206,8 +216,13 @@ export const SaveForm = () => {
     </Container>
   );
 };
-function login(values) {
-  console.log(values.email);
+/**
+* the function which allows us to send the 
+* information entered to the server
+ * @param values the object that contains the information entered by the user 
+ */
+function Save(values) {
+  // prepare the request that we will send to the server
   let request=
   {
     email : values.email,
@@ -217,8 +232,11 @@ function login(values) {
     country : values.Country,
     city : values.City
   }
+  // send the request to the server
   axios.post('http://localhost:3000/api/user/update',request)
   .then(res=>{
     alert(res.data.message)
+  }).catch(err=>{
+    alert(err)
   })
 }

@@ -1,10 +1,16 @@
+/**
+ * this component is our sidebar
+ */
 import React from 'react';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 import * as GoIcons from 'react-icons/go';
 import * as FcIcons from 'react-icons/fc';
 
-
+/**
+ * here we define our element and their paths
+ * and icons
+ */
 export const SidebarData = [
   {
     title: 'THMInsight',

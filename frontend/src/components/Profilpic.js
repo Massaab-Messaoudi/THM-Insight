@@ -1,3 +1,6 @@
+/**
+ * in this component we will deal with image uploading 
+ */
 import React, { Component } from 'react';
 import './PagesStyle.css';
 import 'antd/dist/antd.css'
@@ -21,8 +24,7 @@ export class Image extends Component {
 			
 				
         <div className="container">		
-						<Avatar size={150} src={profileImg} alt="" id="img" className="img" />
-					
+					<Avatar size={150} src={profileImg} alt="" id="img" className="img" />
 					<input type="file" accept="image/*" name="image-upload" id="input" onChange={this.imageHandler} />
 					<div className="label">
           <label className="image-upload" htmlFor="input">

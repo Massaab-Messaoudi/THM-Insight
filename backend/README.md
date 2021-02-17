@@ -1,0 +1,5 @@
+- Clone the repository 
+- Install Docker Compose
+- Open the cmd inside the projet "backend" and run the command : docker-compose up --build 
+- backend app will be running on the port 3000 
+- To make sure the data is properly inserted into the database ...open new terminal and run the command "node dat.js" inside the folder "/backend " (make sure that the backend app is already running)
