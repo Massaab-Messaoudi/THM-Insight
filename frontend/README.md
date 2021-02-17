@@ -4,4 +4,4 @@
 - frontend app will be running on the port 3006 
 - After running both apps frontend/backend (in setp 2),Open http://localhost:3006  in the browser.
 - To be able to modify the information of any user, you must use an address email that exists in the database (email of an existing user )
-- Open the Menu bar and go to Settings page
+- Open the Menu bar and go to Settings page to test the Settings page

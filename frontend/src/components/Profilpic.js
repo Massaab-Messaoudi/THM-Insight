@@ -16,7 +16,9 @@ export class Image extends Component {
         this.setState({profileImg: reader.result})
       }
     }
+    try{
     reader.readAsDataURL(e.target.files[0])
+    }catch{}
   };
 	render() {
     const { profileImg} = this.state

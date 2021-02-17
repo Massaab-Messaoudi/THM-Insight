@@ -17,28 +17,6 @@ database:"thm_database"
 // connect to the data base
 client.connect();
 /**
- * this method allow us 
- * to show the rows of users table
- */
-const index=(req,resp,next)=>
-{
-    
-    client.query('select * from users',(err,res)=>
-    {
-        if(!err)
-        {
-           
-             resp.json({res});
-             
-        }
-        else
-        {
-            console.log(err.message);
-        }
-    
-    })
-}
-/**
  * handle the update request
  */
 const update=(req,resp,next)=>
@@ -67,11 +45,11 @@ const update=(req,resp,next)=>
           })
         }else
         {
-          resp.json({message:"User does not exist ,you must enter an existing user's email address"});
+          resp.json({message:"Email address does not exist"});
         } 
       }).catch(err=>{// an error occurred while trying to connect to the database
         resp.json({err})
       });
     
 } 
-module.exports={index,update}
+module.exports={update}

@@ -2,4 +2,4 @@
 - Install Docker Compose
 - Open the cmd inside the projet "backend" and run the command : docker-compose up --build 
 - backend app will be running on the port 3000 
-- To make sure the data is properly inserted into the database ...open new terminal and run the command "node dat.js" inside the folder "/backend " (make sure that the backend app is already running)
+- To make sure the data is properly inserted into the database ...open new terminal and run the command "node dat.js" inside the folder "/backend " (make sure that the backend app is already running), if you run this script you will add 2 new users to the database, one with email =user-4-companies@cementys.com and the second with email=user-4-companies@cementys.com, you can use them to test the app (settings page)

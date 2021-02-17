@@ -11,6 +11,7 @@ RUN npm install react-scripts@4.0.2 -g
 
 # add app
 COPY . .
+# expose the port
 EXPOSE 3000
 # start app
 CMD [ "npm", "start" ]

@@ -3,7 +3,7 @@ import '../components/PagesStyle.css'
 function Dashboard() {
   return (
     <div className='dashboard'>
-      <h1>Dashboard</h1>
+      <h1>Home Page</h1>
     </div>
   );
 }
