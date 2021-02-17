@@ -21,9 +21,7 @@ app.use(
   }),
 );
 app.use('/api/user',userRoot); // bind the the root /api/user to our router
-/*app.get('/health', (req, res) => res.send({ message: 'ok' }));
-
 const server = app.listen(port, () => {
     console.log(`THM App running on port ${port}.`);
-});*/
+});
 module.exports = server;
