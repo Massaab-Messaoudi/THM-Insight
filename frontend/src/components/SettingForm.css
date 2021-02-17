@@ -1,0 +1,23 @@
+.page{
+    height: 100%;
+    background-color:#4D4F5C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  .container{
+    height: 80%;
+    width: 80%;
+    border-radius: 10px;
+    background-color: #4D4F5C;
+    
+  }
+  .comp{
+    height: 50%;
+    width: 50%;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255); 
+  }
+ 
+  
