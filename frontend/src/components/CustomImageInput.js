@@ -1,6 +1,10 @@
+/**
+ * in this file I defined my custom input which I used to download
+* the profile picture in the settings form
+ */
+
 import React, { Component } from "react";
 import Typography from "@material-ui/core/Typography";
-import Icon from "@material-ui/core/Icon";
 import Avatar from "@material-ui/core/Avatar";
 
 import withStyles from "@material-ui/core/styles/withStyles";
