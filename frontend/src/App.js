@@ -13,7 +13,9 @@ import Report from './Pages/Report';
 
 function App() {
   return (
+  
     <>
+    
       <Router>
         <Navbar />
         <Switch>
@@ -28,6 +30,7 @@ function App() {
         </Switch>
       </Router>
     </>
+   
   );
 }
 

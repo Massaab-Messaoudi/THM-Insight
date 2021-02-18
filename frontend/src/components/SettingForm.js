@@ -2,15 +2,15 @@
  * in this component I created an formik form ,where user can change
   * his information 
  */
+import CustomImageInput from "./CustomImageInput";
 import React from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import axios from 'axios';
+import Axios from 'axios';
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import {Image} from './Profilpic'
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 //I use this object to validate the entered phone number
@@ -21,6 +21,7 @@ let SettingsSchema = yup.object().shape({
   Surname: yup.string().required("This field is required."),
   Country:yup.string().required("This field is required."),
   City:yup.string().required("This field is required."),
+  file: yup.mixed().notRequired("not req"),
   email: yup
     .string()
     .email()
@@ -69,6 +70,7 @@ export const SaveForm = () => {
         <Formik
           //inisialisation
           initialValues={{
+            file: undefined,
             Name: "",
             Surname: "",
             Country: "",
@@ -82,12 +84,23 @@ export const SaveForm = () => {
             Save(values);
           }}
         >
-          {({ errors, handleChange, touched }) => (
+          {({ errors, handleChange, touched,setFieldValue }) => (
             <Form className={classes.form}>
-              <Grid>
-              <div className={classes.paper}><Image/></div>
-              </Grid>
+              
               <Grid container spacing={2}>
+              <Grid item xs={12} sm={12}>
+                <Field
+                name="file"
+                id="field"
+                component={CustomImageInput}
+                title="Select a profile picture"
+                setFieldValue={setFieldValue}
+          
+               // touched={touched["file"]}
+                style={{ display: "flex" }}
+                onChange={handleChange}
+              />
+                </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     error={errors.Name && touched.Name}
@@ -222,21 +235,20 @@ export const SaveForm = () => {
  * @param values the object that contains the information entered by the user 
  */
 function Save(values) {
-  // prepare the request that we will send to the server
-  let request=
-  {
-    email : values.email,
-    first_name : values.Name,
-    last_name : values.Surname,
-    phonenumber : values.PhoneNumber,
-    country : values.Country,
-    city : values.City
-  }
-  // send the request to the server
-  axios.post('http://localhost:3000/api/user/update',request)
+  console.log(values.file);
+  const data = new FormData();
+  data.append("file",values.file);
+  data.append("first_name",values.Name);
+  data.append("last_name",values.Surname);
+  data.append("email",values.email);
+  data.append("country",values.Country);
+  data.append("city",values.City);
+  data.append("phonenumber",values.PhoneNumber);
+  Axios.post('http://localhost:3000/api/user/update',data)
   .then(res=>{
     alert(res.data.message)
   }).catch(err=>{
     alert(err)
   })
+
 }

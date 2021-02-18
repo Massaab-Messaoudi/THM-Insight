@@ -12,9 +12,10 @@ CREATE TABLE users (
   city TEXT,
   phone_number TEXT,
   position TEXT,
+  img BYTEA,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS _index_users_email ON users (email);
-COMMIT;
 
+COMMIT;
